@@ -12,19 +12,16 @@
 	   
 	    	<h5><b>Proses Perhitungan Kuadrat (X1 - X) + (X2- 2) +....(Xn-X) Pangkat 2</b></h5>
 	     
-	         <tr>				
-	         				<th><center>Bulan</center></th>
-                          <th><center>Kehilangan Hp</center></th>
-                          <th><center>Pembegalan</center></th>
-                          <th><center>Curanmor</center></th>
-                          <th><center>Pencopetan</center></th>
-						  <th><center>Penipuan</center></th>
-                          
-                          <th><center>Total Perhitungan</center></th>
-                          
-                          <th><center>Kesimpulan</center></th>
-                          
-                          
+	         <tr>
+                 <th class="text-center">Bulan</th>
+                 <th class="text-center">Lokasi</th>
+                 <th class="text-center">Kehilangan HP</th>
+                 <th class="text-center">Pembegalan</th>
+                 <th class="text-center">Curanmor</th>
+                 <th class="text-center">Pencopetan</th>
+                 <th class="text-center">Penipuan</th>
+                 <th class="text-center">Total Perhitungan</th>
+                 <th class="text-center">Kesimpulan</th>
               </tr>
                       
 	  
@@ -34,70 +31,48 @@
                       		$curanmor2=0;
                       		$pencopetan2=0;
                       		$penipuan2=0;
-                      		
-                      		
-                      			
                       		$sql = $koneksi->query("select * from testing");
-                      		
                       		while ($data=$sql->fetch_assoc()){
-
 								$kehilangan_hp2=$data['kehilangan_hp2'];
 								$pembegalan2=$data['pembegalan2'];
                       			$curanmor2=$data['curanmor2'];
                       			$pencopetan2=$data['pencopetan2'];
                       			$penipuan2=$data['penipuan2'];
-                      			
-                      			
                       		}
-
                       	?>
-
 							<?php
                       		$no =1;
-                      		
-                      			
                       		$sql = $koneksi->query("SELECT * from training ");
-                      		
                       		while ($data=$sql->fetch_assoc()){
-
-                      			
-
+                      		    $point = pow($kehilangan_hp2 - $data['kehilangan_hp'],2) + pow($pembegalan2 - $data['pembegalan'],2) +
+                                    pow( $curanmor2 - $data['curanmor'] ,2) + pow( $pencopetan2 - $data['pencopetan'] ,2) +
+                                    pow($penipuan2 - $data['penipuan'],2);
                       	?>
                         <tr>
-                          <td align="center" ><?php echo $data['bulan']   ;?></td> 
-						  <td align="center" ><?php echo pow($kehilangan_hp2 - $data['kehilangan_hp'],2);?></td>
+                          <td align="center" ><?php echo $data['bulan']   ;?></td>
+                            <td align="center" ><?php echo $data['lokasi']   ;?></td>
+                            <td align="center" ><?php echo pow($kehilangan_hp2 - $data['kehilangan_hp'],2);?></td>
 						  <td align="center" ><?php echo pow($pembegalan2 - $data['pembegalan'],2);?></td>
                           <td align="center" ><?php echo pow( $curanmor2 - $data['curanmor'] ,2)   ;?></td>
                           <td align="center" ><?php echo pow( $pencopetan2 - $data['pencopetan'] ,2) ;?></td>
                           <td align="center" ><?php echo  pow($penipuan2 - $data['penipuan'],2);?></td>
-                          
-                          
                           <td align="center" >
-
-                          		<b>
-                          			
-
-                          	<?php 
-                          	
-                          		
-                          	echo  sqrt( 
-									   pow( $kehilangan_hp2 - $data['kehilangan_hp'] ,2)
-							  +	       pow($pembegalan2 - $data['pembegalan'],2)); 
-							  +		   pow( $curanmor2 - $data['curanmor'] ,2)
-                          	  +  	   pow( $pencopetan2 - $data['pencopetan'] ,2) 
-                          	  +		   pow($penipuan2 - $data['penipuan'],2) 
-                          	  
-                         
-                          	 
-                          		
-                          	
+                            <b>
+                          	<?php
+//                          	echo  sqrt(
+//									   pow( $kehilangan_hp2 - $data['kehilangan_hp'] ,2)
+//							  +	       pow($pembegalan2 - $data['pembegalan'],2));
+//							  +		   pow( $curanmor2 - $data['curanmor'] ,2)
+//                          	  +  	   pow( $pencopetan2 - $data['pencopetan'] ,2)
+//                          	  +		   pow($penipuan2 - $data['penipuan'],2)
+//
+                            echo $point;
                           	?> 
-                          	
+                            </b>
                           		</b>
 
-
                           </td>
-                          <td align="center" ><?php echo $data['kesimpulan'];?></td>
+                          <td align="center" ><?php echo ($point >= 500) ? "RAWAN": "TIDAK RAWAN"; ?></td>
 						 </tr>
 
 						 
@@ -138,13 +113,15 @@
                       		$sql = $koneksi->query("SELECT * from training");
                       		
                       		while ($data=$sql->fetch_assoc()){
+                                $point2 = pow($kehilangan_hp2 - $data['kehilangan_hp'],2) + pow($pembegalan2 - $data['pembegalan'],2) +
+                                    pow( $curanmor2 - $data['curanmor'] ,2) + pow( $pencopetan2 - $data['pencopetan'] ,2) +
+                                    pow($penipuan2 - $data['penipuan'],2);
 
-								$kehilangan_hp=$data['kehilangan_hp'];
-                      			$pembegalan=$data['pembegalan'];
-                      			$curanmor=$data['curanmor'];
-                      			$pencopetan=$data['pencopetan'];
-                      			$penipuan=$data['penipuan'];
-                      			$kesimpul=$data['kesimpulan'];
+//								$kehilangan_hp=$data['kehilangan_hp'];
+//                      			$pembegalan=$data['pembegalan'];
+//                      			$curanmor=$data['curanmor'];
+//                      			$pencopetan=$data['pencopetan'];
+//                      			$penipuan=$data['penipuan'];
 
                       	?>
 
@@ -156,27 +133,23 @@
 
                       		<?php 
 
-                     		echo  sqrt( 
-										   pow( $kehilangan_hp2 - $data['kehilangan_hp'] ,2)
-								+	       pow($pembegalan2 - $data['pembegalan'],2)); 
-								+		   pow( $curanmor2 - $data['curanmor'] ,2)
-								+  	       pow( $pencopetan2 - $data['pencopetan'] ,2) 
-								+		   pow($penipuan2 - $data['penipuan'],2) 
-                         
+//                     		echo  sqrt(
+//										   pow( $kehilangan_hp2 - $data['kehilangan_hp'] ,2)
+//								+	       pow($pembegalan2 - $data['pembegalan'],2));
+//								+		   pow( $curanmor2 - $data['curanmor'] ,2)
+//								+  	       pow( $pencopetan2 - $data['pencopetan'] ,2)
+//								+		   pow($penipuan2 - $data['penipuan'],2)
+//
+                            echo $point2;
 
                           	  ?>
                            	  </td>
                            	  
-                           	  <?php  
-                           	  		$color = "";
-                           	  			if       ($data['kesimpulan'] == "Rawan"){
-                           	  		$color = "red";
-                           	  			}else if ($data['kesimpulan'] == "Tidak Rawan"){
-                           	  		$color = "blue";
-                           	  	}
-                           	  ?>
 
-                       	      <td align="center" style="color:<?= $color?> "><?php echo $data['kesimpulan']?></td>    
+                       	      <td align="center" style="color:<?= $color?> ">
+
+                                  <?php echo ($point2 >= 500)? "RAWAN" : "TIDAK RAWAN" ?>
+                              </td>
                       	</tr>
 
                 		 <?php

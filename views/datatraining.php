@@ -8,17 +8,15 @@
               <table id="training" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th><center>No</center></th>
-                  <th><center>Bulan</center></th>
-                  <th><center>Lokasi</center></th>
-                          <th><center>Kehilangan HP</center></th>
-                          <th><center>Pembegalan</center></th>
-                          <th><center>Curanmor</center></th>
-                          <th><center>Pencopetan</center></th>
-                          <th><center>Penipuan</center></th>
-                          
-                          <th><center>Kesimpulan</center></th>
-                          <th><center>Aksi</center></th>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Bulan</th>
+                    <th class="text-center">Lokasi</th>
+                    <th class="text-center">Kehilangan HP</th>
+                    <th class="text-center">Pembegalan</th>
+                    <th class="text-center">Curanmor</th>
+                    <th class="text-center">Pencopetan</th>
+                    <th class="text-center">Penipuan</th>
+                    <th class="text-center">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,7 +24,6 @@
                           $no =1;
                           $sql = $koneksi->query("select * from training");
                           while ($data=$sql->fetch_assoc()){
-
                         ?>
                        <tr>
                           <td align="center"><?php echo $no++;?></td>
@@ -38,7 +35,7 @@
                           <td align="center" ><?php echo $data['pencopetan'];?></td>
                           <td align="center" ><?php echo $data['penipuan'];?></td>
                           
-                          <td align="center" ><?php echo $data['kesimpulan'];?></td>
+
 
                           <td width="20%" align="center">
 
@@ -49,12 +46,7 @@
                             data-pembegalan="<?php echo $data['pembegalan'];?>"
                             data-curanmor="<?php echo $data['curanmor'];?>"
                             data-pencopetan="<?php echo $data['pencopetan'];?>" 
-                            data-penipuan="<?php echo $data['penipuan'];?>" 
-                            
-                            data-kesimpulan="<?php echo $data['kesimpulan'];?>" 
-
-
-
+                            data-penipuan="<?php echo $data['penipuan'];?>"
                               class="btn btn-info"><i class="fa fa-edit"></i></a>
 
                             <a href="?page=datatraining&page=hapusdatatraining&bulan=<?php echo $data['bulan']?>" class="btn btn-danger" onclick=" return confirm('Apakah Ingin Menghapus Data??')"><i class="fa fa-trash"></i></a>
@@ -90,7 +82,21 @@
                                             <form role="form" method="POST">
                                             <div class="form-group">
                                                 <label>Bulan</label>
-                                                <input class="form-control" autocomplete="off" name="bulan" placeholder="Bulan" required>
+                                                <select name="bulan" id="bulan" class="form-control" required="required">
+                                                    <option value="januari">Januari</option>
+                                                    <option value="februari">Februari</option>
+                                                    <option value="maret">Maret</option>
+                                                    <option value="april">April</option>
+                                                    <option value="mei">Mei</option>
+                                                    <option value="juni">Juni</option>
+                                                    <option value="juli">Juli</option>
+                                                    <option value="agustus">Agustus</option>
+                                                    <option value="september">September</option>
+                                                    <option value="oktober">Oktober</option>
+                                                    <option value="november">November</option>
+                                                    <option value="desember">Desember</option>
+                                                </select>
+
                                                 
                                               </div>
                                               <div class="form-group">
@@ -129,14 +135,6 @@
                                                 <input  class="form-control" autocomplete="off" name="penipuan" placeholder="Penipuan" required>
                                                 
                                               </div>  
-                                               <div class="form-group">
-                                                <label>Kesimpulan</label>
-                                                <input  class="form-control" autocomplete="off" name="kesimpulan" placeholder="Kesimpulan" required>
-                                                
-                                              </div>                                       
-                                                      
-
-                                               
 
                                         </div>
                                         <div class="modal-footer">
@@ -162,11 +160,10 @@
                             $curanmor   = $_POST['curanmor'];
                             $pencopetan   = $_POST['pencopetan'];
                             $penipuan   = $_POST['penipuan'];
-                            $kesimpulan   = $_POST['kesimpulan'];
                             
                             
                                
-                               $sql=$koneksi->query("insert into training (bulan,lokasi,kehilangan_hp,pembegalan,curanmor,pencopetan,penipuan,kesimpulan)values('$bulan','$lokasi','$kehilangan_hp','$pembegalan','$curanmor','$pencopetan','$penipuan','$kesimpulan')");
+                               $sql=$koneksi->query("insert into training (bulan,lokasi,kehilangan_hp,pembegalan,curanmor,pencopetan,penipuan)values('$bulan','$lokasi','$kehilangan_hp','$pembegalan','$curanmor','$pencopetan','$penipuan')");
                                
                                if ($sql){
                                 ?>
@@ -208,13 +205,13 @@
                                               </div>
                                               <div class="form-group">
                                                 <label>Kehilangan HP</label>
-                                                <input id="kehilangan_hp" class="form-control" autocomplete="off" name="kehilangan_hp" placeholder="Kehilangan HP" required readonly>
+                                                <input id="kehilangan_hp" class="form-control" autocomplete="off" name="kehilangan_hp" placeholder="Kehilangan HP" required>
                                                 
                                               </div>
                                            
                                                                                  
                                               <div class="form-group">
-                                                <label>Pembegalan/label>
+                                                <label>Pembegalan</label>
                                                 <input  class="form-control" autocomplete="off" name="pembegalan" placeholder="Semester 1" id="pembegalan" required>
                                                 
                                               </div>                                       
@@ -237,11 +234,7 @@
                                                 <input  class="form-control" autocomplete="off" name="penipuan" placeholder="Semester 4" id="penipuan" required>
                                                 
                                               </div>  
-                                               <div class="form-group">
-                                                <label>Kesimpulan</label>
-                                                <input  class="form-control" autocomplete="off" name="kesimpulan" placeholder="Kesimpulan" id="kesimpulan" readonly="">
-                                                
-                                              </div>         
+
                                          <div class="modal-footer">
                                             <button class="btn btn-success " type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
                                            <input type="submit" name="ubah" value="Ubah" class=" btn btn-primary">
@@ -265,7 +258,7 @@
                               var curanmor = $(this).data('curanmor');
                               var pencopetan = $(this).data('pencopetan');
                               var penipuan = $(this).data('penipuan');
-                              var kesimpulan = $(this).data('kesimpulan');
+
                               
                               $("#modal_edit #bulan").val(bulan);
                               $("#modal_edit #lokasi").val(lokasi);
@@ -274,7 +267,7 @@
                               $("#modal_edit #curanmor").val(curanmor);
                               $("#modal_edit #pencopetan").val(pencopetan);
                               $("#modal_edit #penipuan").val(penipuan);
-                              $("#modal_edit #kesimpulan").val(kesimpulan);
+
                               
                            })
                          </script>
@@ -289,7 +282,6 @@
                             $curanmor   = $_POST['curanmor'];
                             $pencopetan   = $_POST['pencopetan'];
                             $penipuan   = $_POST['penipuan'];
-                            $kesimpulan   = $_POST['kesimpulan'];
                             
                             
                             
@@ -300,8 +292,7 @@
                                pembegalan='$pembegalan',
                                curanmor='$curanmor',
                                pencopetan='$pencopetan',
-                               penipuan='$penipuan',
-                               kesimpulan='$kesimpulan'
+                               penipuan='$penipuan'
                                 
                                 where bulan='$bulan'");
                                

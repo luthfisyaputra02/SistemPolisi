@@ -177,18 +177,11 @@
             if(@$_GET['page']== 'dashboard' || @$_GET['page']== '' ){
               include "views/dashboard.php";
 
-            
-
-
-            
-
               } else if(@$_GET['page']== 'hapusdatatraining' || @$_GET['page']== '' ){
               include "views/hapusdatatraining.php";
               
               } else if(@$_GET['page']== 'hapusdatatesting' || @$_GET['page']== '' ){
               include "views/hapusdatatesting.php";
-              
-             
 
             } else if(@$_GET['page']== 'hapusakses' || @$_GET['page']== '' ){
               include "views/hapusakses.php";
